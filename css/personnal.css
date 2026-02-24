@@ -1,0 +1,25 @@
+.personnal-info h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+}
+
+.info-label,
+.info-value {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    font-size: 0.9rem;
+}
+
+.info-label {
+    color: #aaa;
+    font-size: 0.8rem;
+}
