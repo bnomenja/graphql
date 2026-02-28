@@ -1,32 +1,116 @@
-export const showPersonnalInfo = () => {
+const generateUserObject = (data) => {
+    const user = {}
+
+    user.nickname = data.user[0].login
+    user.firstname = data.user[0].attrs.firstName
+    user.lastname = data.user[0].attrs.lastName
+    user.campus = data.user[0].campus
+    user.totalXp = Math.round(data.totalXp.aggregate.sum.amount / 1000)
+    user.level = data.level.aggregate.max.amount
+    user.ratio = Math.round(data.user[0].auditRatio * 10) / 10
+
+    const promo = data.user[0].events[0].cohorts[0].labelName.split("_")
+    user.cohort = promo[0].split("")[1]
+    user.joinDate = new Date(`${promo[1]}${promo[2]}${promo[3]}`).toLocaleDateString()
+
+    return user
+}
+
+const displayPersonnalInfo = (user) => {
+        document.querySelector(".data-container").innerHTML = `
+                <div class="personnal-info">
+                    <h2>Personal Info</h2>
+
+                    <div class="info-grid">
+                        <span class="info-label">Username</span>
+                        <span class="info-value">${user.nickname}</span>
+
+                        <span class="info-label">Firstname</span>
+                        <span class="info-value">${user.firstname}</span>
+
+                        <span class="info-label">Lastname</span>
+                        <span class="info-value">${user.lastname}</span>
+
+                        <span class="info-label">Member since</span>
+                        <span class="info-value">${user.joinDate}</span>
+
+                        <span class="info-label">Cohort</span>
+                        <span class="info-value">${user.cohort}</span>
+
+                        <span class="info-label">Audit ratio</span>
+                        <span class="info-value">${user.ratio}</span>
+
+                        <span class="info-label">Total XP</span>
+                        <span class="info-value">${user.totalXp}</span>
+
+                        <span class="info-label">Current level:</span>
+                        <span class="info-value">${user.level}</span>
+
+                    </div>
+                </div>
+    `
+}
+
+export const showPersonnalInfo = async () => {
     const jwt = localStorage.getItem("jwt")
 
-    document.querySelector(".data-container").innerHTML = `
-            <div class="personnal-info">
-                <h2>Personal Info</h2>
+    const query = `
+{
+  user {
+    attrs
+    login
+    campus
+    auditRatio
+    events(limit: 1) {
+      cohorts {
+        labelName
+      }
+    }
+  },
+  
+  level: transaction_aggregate(
+    where: { type: { _eq: "level" } }
+  ) {
+    aggregate {
+      max {
+        amount
+      }
+    }
+  }
 
-                <div class="info-grid">
-                    <span class="info-label">Username</span>
-                    <span class="info-value">bnomenja</span>
+  totalXp: transaction_aggregate(
+    where: {
+      _and: [
+        { type: { _eq: "xp" } },
+        { event: { object: { name: { _eq: "Module" } } } }
+      ]
+    }
+  ) {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+}
+`;
 
-                    <span class="info-label">Firstname</span>
-                    <span class="info-value">BEMAMORY</span>
+    try {
+        const resp = await fetch("https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${jwt}` },
+            body: JSON.stringify({ query })
+        })
 
-                    <span class="info-label">Lastname</span>
-                    <span class="info-value">Nomenjanahary Luciano Loïc</span>
+        const result = await resp.json()
 
-                    <span class="info-label">Member since</span>
-                    <span class="info-value">2024-01-15</span>
+        const data = result.data
 
-                    <span class="info-label">Cohort</span>
-                    <span class="info-value">5</span>
+        const user = generateUserObject(data)
 
-                    <span class="info-label">Audit ratio</span>
-                    <span class="info-value">3.1</span>
+        displayPersonnalInfo(user)
 
-                    <span class="info-label">Total XP</span>
-                    <span class="info-value">142 380 kb</span>
-                </div>
-            </div>
-`
+    } catch (err) {
+        console.log(err)
+    }
 }

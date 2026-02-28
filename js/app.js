@@ -13,7 +13,6 @@ if (jwt) {
 
 document.addEventListener("click", e => {
     e.preventDefault()
-    console.log(e.target.id)
     if (e.target.id === "personnal-btn") {
         showPersonnalInfo()
     }
