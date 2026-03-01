@@ -1,0 +1,23 @@
+.skills-svg-container {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .skills-svg-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .label {
+    font-size: 3px;
+    fill: rgb(235,235,235);
+  }
+
+  .bar-bg {
+    fill: rgb(235,235,235);
+  }
+
+  .bar-value {
+    fill: grey;
+  }

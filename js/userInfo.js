@@ -5,8 +5,8 @@ const generateUserObject = (data) => {
     user.firstname = data.user[0].attrs.firstName
     user.lastname = data.user[0].attrs.lastName
     user.campus = data.user[0].campus
-    user.totalXp = Math.round(data.totalXp.aggregate.sum.amount / 1000)
-    user.level = data.level.aggregate.max.amount
+    user.totalXp = String( Math.round(data.totalXp.aggregate.sum.amount / 1000)) + " kB"
+    user.level = data.level[0].amount
     user.ratio = Math.round(data.user[0].auditRatio * 10) / 10
 
     const promo = data.user[0].events[0].cohorts[0].labelName.split("_")
@@ -68,14 +68,12 @@ export const showPersonnalInfo = async () => {
     }
   },
   
-  level: transaction_aggregate(
-    where: { type: { _eq: "level" } }
+  level: transaction(
+    where: {type: {_eq: "level"}}
+    order_by: {id: desc}
+    limit: 1
   ) {
-    aggregate {
-      max {
-        amount
-      }
-    }
+    amount
   }
 
   totalXp: transaction_aggregate(
