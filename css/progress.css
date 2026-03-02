@@ -1,0 +1,36 @@
+.data-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.graph-axis {
+  stroke: aliceblue;
+}
+
+.graph-line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 3;
+}
+
+.graph-point {
+  fill: white;
+  r: 3;
+}
+
+.graph-label {
+  fill: aliceblue;
+  font-size: 12px;
+}
+
+.graph-tooltip {
+  position: fixed;
+  pointer-events: none;
+  padding: 4px 6px;
+  background: #111;
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  display: none;
+}

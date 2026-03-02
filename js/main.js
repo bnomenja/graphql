@@ -38,7 +38,7 @@ export const showMainPage = async (jwt) => {
                 <span>what do you wanna see today ?</span>
                 <button type="button" id="personnal-btn">personnal info</button>
                 <button type="button" id="skills-btn">skills</button>
-                <button type="button">xp progression</button>
+                <button type="button" id="progress-btn">xp progression</button>
                 <button type="button">project ratio</button>
             </div>
 

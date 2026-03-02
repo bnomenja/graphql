@@ -1,6 +1,7 @@
 import { initLogin } from "./login.js"
 import { logout } from "./logout.js"
 import { showMainPage } from "./main.js"
+import { showProgress } from "./progress.js"
 import { showSkills } from "./skills.js"
 import { showPersonnalInfo } from "./userInfo.js"
 
@@ -23,6 +24,11 @@ document.addEventListener("click", e => {
 
         case "skills-btn": {
             showSkills()
+            break
+        }
+
+        case "progress-btn": {
+            showProgress()
             break
         }
 

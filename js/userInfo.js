@@ -4,6 +4,7 @@ const generateUserObject = (data) => {
     user.nickname = data.user[0].login
     user.firstname = data.user[0].attrs.firstName
     user.lastname = data.user[0].attrs.lastName
+    user.email = data.user[0].attrs.email
     user.campus = data.user[0].campus
     user.totalXp = String( Math.round(data.totalXp.aggregate.sum.amount / 1000)) + " kB"
     user.level = data.level[0].amount
@@ -22,25 +23,28 @@ const displayPersonnalInfo = (user) => {
                     <h2>Personal Info</h2>
 
                     <div class="info-grid">
-                        <span class="info-label">Username</span>
+                        <span class="info-label">Username:</span>
                         <span class="info-value">${user.nickname}</span>
 
-                        <span class="info-label">Firstname</span>
+                        <span class="info-label">Firstname:</span>
                         <span class="info-value">${user.firstname}</span>
 
-                        <span class="info-label">Lastname</span>
+                        <span class="info-label">Lastname:</span>
                         <span class="info-value">${user.lastname}</span>
 
-                        <span class="info-label">Member since</span>
+                        <span class="info-label">email:</span>
+                        <span class="info-value">${user.email}</span>
+
+                        <span class="info-label">Member since:</span>
                         <span class="info-value">${user.joinDate}</span>
 
-                        <span class="info-label">Cohort</span>
+                        <span class="info-label">Cohort:</span>
                         <span class="info-value">${user.cohort}</span>
 
-                        <span class="info-label">Audit ratio</span>
+                        <span class="info-label">Audit ratio:</span>
                         <span class="info-value">${user.ratio}</span>
 
-                        <span class="info-label">Total XP</span>
+                        <span class="info-label">Total XP:</span>
                         <span class="info-value">${user.totalXp}</span>
 
                         <span class="info-label">Current level:</span>
