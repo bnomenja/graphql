@@ -100,5 +100,5 @@ The app is hosted on: _[URL]_
 
 ## Author
 
-BEMAMORY Nomenjanahary Luciano Loic (**bnomenja**)
+BEMAMORY Nomenjanahary Luciano Loic (**bnomenja**)  
 GitHub: [github.com/bnomenja](https://github.com/bnomenja)
