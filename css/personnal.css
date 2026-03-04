@@ -1,25 +1,53 @@
-.personnal-info h2 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #aaa;
-    margin-bottom: 1.5rem;
+.personnal-info {
+    width: 100%;
+    max-width: 520px;
+    animation: viewEnter 0.35s ease both;
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
 .info-label,
 .info-value {
-    padding: 0.7rem 0;
-    border-bottom: 1px solid rgb(235, 235, 235);
-    font-size: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.info-grid > span:nth-last-child(-n+2) {
+    border-bottom: none;
 }
 
 .info-label {
-    color: #aaa;
-    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.018);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    transition: color var(--t-fast);
+}
+
+.info-value {
+    color: var(--text);
+    font-family: var(--font-mono);
+    background: transparent;
+    transition: background var(--t-fast);
+}
+
+.info-value:hover {
+    background: var(--accent-glow);
+}
+
+.info-label:has(+ .info-value:hover) {
+    color: var(--accent);
 }

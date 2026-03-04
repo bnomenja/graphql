@@ -1,0 +1,102 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 2px;
+}
+
+button {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    transition:
+        color var(--t-normal),
+        border-color var(--t-normal),
+        background var(--t-normal),
+        box-shadow var(--t-normal);
+}
+
+button:hover {
+    color: var(--accent);
+    border-color: var(--border-hover);
+    background: var(--accent-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.data-container h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw + 0.5rem, 2.4rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.data-container h1::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0.5rem auto 0;
+    opacity: 0.7;
+}
+
+.loading {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 1;   }
+}
+
+.view-error {
+    color: var(--error);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(224, 92, 92, 0.25);
+    background: var(--error-bg);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-xs);
+}

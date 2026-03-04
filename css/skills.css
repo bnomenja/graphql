@@ -1,23 +1,29 @@
 .skills-svg-container {
     width: 100%;
-    max-width: 500px;
-  }
+    max-width: 480px;
+    animation: viewEnter 0.4s ease both;
+}
 
-  .skills-svg-container svg {
+.skills-svg-container svg {
     width: 100%;
     height: auto;
     display: block;
-  }
+}
 
-  .label {
+.label {
+    font-family: var(--font-mono);
     font-size: 3px;
-    fill: rgb(235,235,235);
-  }
+    fill: var(--text-muted);
+    letter-spacing: 0.03em;
+}
 
-  .bar-bg {
-    fill: rgb(235,235,235);
-  }
+.bar-bg {
+    fill: var(--bg-surface);
+    rx: 1;
+}
 
-  .bar-value {
-    fill: grey;
-  }
+.bar-value {
+    fill: var(--accent);
+    rx: 1;
+    opacity: 0.85;
+}

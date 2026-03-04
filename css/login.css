@@ -1,69 +1,122 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
+body:has(.login-container) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100dvh;
-    background-color: rgb(31, 31, 31);
-    color: rgb(235, 235, 235);
-    font-size: 18px;
+    background-color: var(--bg);
+
+    background-image: radial-gradient(ellipse at 60% 20%, rgba(212, 175, 95, 0.04) 0%, transparent 60%);
 }
 
 .login-container {
-    border: 2px solid rgb(235, 235, 235);
-    width: min(500px, 90%);
-    aspect-ratio: 4 / 3;
+    width: min(420px, 92%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1.8rem;
-    padding: 2.5rem;
-    border-radius: 15px;
+    gap: 1.6rem;
+    padding: 3rem 2.8rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow:
+        0 0 0 1px rgba(212, 175, 95, 0.04),
+        0 24px 60px rgba(0, 0, 0, 0.5);
+
+    animation: loginFadeIn 0.5s ease both;
 }
 
-h1 {
-    align-self: center;
-    font-size: 1.8rem;
+@keyframes loginFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: var(--text);
+
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.login-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
 }
 
 .error-container {
     display: none;
-    align-self: stretch;
-    background-color: rgba(255, 0, 0, 0.1);
-    color: rgb(255, 100, 100);
-    border: 1px solid rgb(255, 100, 100);
-    border-radius: 4px;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
+    background: var(--error-bg);
+    color: var(--error);
+    border: 1px solid rgba(224, 92, 92, 0.25);
+    border-radius: var(--radius-xs);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
     text-align: center;
+    animation: loginFadeIn 0.2s ease;
 }
 
 .input-container {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
 }
 
-.input-container input {
-    padding: 0.6rem 0.8rem;
-    border: 1px solid rgb(235, 235, 235);
-    background: transparent;
-    color: white;
-    border-radius: 4px;
-    outline: none;
+.input-container label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.input-container input,
+.input-wrapper input {
     width: 100%;
-    font-size: 1rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color var(--t-normal), box-shadow var(--t-normal);
+}
+
+.input-container input:focus,
+.input-wrapper input:focus {
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.input-container input:-webkit-autofill,
+.input-container input:-webkit-autofill:hover,
+.input-container input:-webkit-autofill:focus,
+.input-container input:-webkit-autofill:active,
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus,
+.input-wrapper input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 100px var(--bg-surface) inset;
+    -webkit-text-fill-color: var(--text);
+    caret-color: var(--text);
 }
 
 .input-wrapper {
@@ -73,32 +126,51 @@ h1 {
 }
 
 .input-wrapper input {
-    padding-right: 2.5rem;
+    padding-right: 2.8rem;
 }
 
 .input-wrapper button {
     position: absolute;
     right: 0.5rem;
-    background: transparent;
+    padding: 0.2rem 0.3rem;
     border: none;
-    cursor: pointer;
-    padding: 0.2rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    transition: color var(--t-fast);
+}
+
+.input-wrapper button:hover {
+    color: var(--text);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
 }
 
 #login-btn {
     align-self: center;
-    padding: 0.5rem 2.5rem;
-    background: transparent;
-    color: rgb(235, 235, 235);
-    border: 1px solid rgb(235, 235, 235);
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s, color 0.2s;
+    padding: 0.6rem 3rem;
+    color: var(--accent);
+    border-color: var(--border-hover);
+    letter-spacing: 0.15em;
+    margin-top: 0.4rem;
+    transition:
+        background var(--t-normal),
+        color var(--t-normal),
+        box-shadow var(--t-normal),
+        transform var(--t-fast);
 }
 
 #login-btn:hover {
-    background: rgb(235, 235, 235);
-    color: rgb(31, 31, 31);
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 24px rgba(212, 175, 95, 0.25);
+    transform: translateY(-1px);
+}
+
+#login-btn:active {
+    transform: translateY(0) scale(0.98);
 }

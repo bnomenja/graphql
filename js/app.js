@@ -1,41 +1,27 @@
-import { initLogin } from "./login.js"
-import { logout } from "./logout.js"
-import { showMainPage } from "./main.js"
-import { showProgress } from "./progress.js"
-import { showSkills } from "./skills.js"
-import { showPersonnalInfo } from "./userInfo.js"
+import { getJwt, removeJwt } from "./utils/auth.js"
+import { initLogin }         from "./views/login.js"
+import { showMainPage }      from "./views/main.js"
+import { showPersonnalInfo } from "./views/personalInfo.js"
+import { showSkills }        from "./views/skills.js"
+import { showProgress }      from "./views/progress.js"
+import { showProjectRatio }  from "./views/projectAudit.js"
 
-const jwt = localStorage.getItem("jwt")
+getJwt() ? showMainPage() : initLogin()
 
-if (jwt) {
-    showMainPage(jwt)
-} else {
-    initLogin()
+const routes = {
+    "personnal-btn":    showPersonnalInfo,
+    "skills-btn":       showSkills,
+    "progress-btn":     showProgress,
+    "project-ratio-btn": showProjectRatio,
+    "logout-btn": () => {
+        removeJwt()
+        initLogin()
+    }
 }
 
 document.addEventListener("click", e => {
     e.preventDefault()
-
-    switch (e.target.id) {
-        case "personnal-btn": {
-            showPersonnalInfo()
-            break
-        }
-
-        case "skills-btn": {
-            showSkills()
-            break
-        }
-
-        case "progress-btn": {
-            showProgress()
-            break
-        }
-
-        case "logout-btn": {
-            logout()
-            break
-        }
-    }
-
+    const btn = e.target.closest("button")
+    if (!btn) return
+    routes[btn.id]?.()
 })

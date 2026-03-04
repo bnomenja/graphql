@@ -1,36 +1,58 @@
-.data-container svg {
-  width: 100%;
-  height: auto;
-  display: block;
+.data-container > svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: viewEnter 0.4s ease both;
 }
 
 .graph-axis {
-  stroke: aliceblue;
+    stroke: var(--border-hover);
+    stroke-width: 1;
 }
 
 .graph-line {
-  fill: none;
-  stroke: grey;
-  stroke-width: 3;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 95, 0.3));
 }
 
 .graph-point {
-  fill: white;
-  r: 3;
+    fill: var(--bg-elevated);
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    r: 3;
+    transition: r 0.15s ease;
+    cursor: pointer;
+}
+
+.graph-point:hover {
+    r: 5;
+    fill: var(--accent);
 }
 
 .graph-label {
-  fill: aliceblue;
-  font-size: 12px;
+    fill: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
 }
 
 .graph-tooltip {
-  position: fixed;
-  pointer-events: none;
-  padding: 4px 6px;
-  background: #111;
-  color: white;
-  font-size: 12px;
-  border-radius: 4px;
-  display: none;
+    position: fixed;
+    pointer-events: none;
+    padding: 6px 10px;
+    background: var(--bg-surface);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius-xs);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    display: none;
+    white-space: nowrap;
+    z-index: 100;
 }

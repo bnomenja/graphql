@@ -1,73 +1,211 @@
 .main-container {
-    border: 2px solid rgb(235, 235, 235);
     display: flex;
     width: 100%;
     min-height: 100vh;
-    padding: clamp(4px, 0.5%, 12px);
-    gap: clamp(6px, 1%, 20px);
+    padding: clamp(6px, 0.6vw, 14px);
+    gap: clamp(6px, 0.6vw, 14px);
     position: relative;
-    box-sizing: border-box;
+    background: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 10% 50%, rgba(212, 175, 95, 0.03) 0%, transparent 50%);
+
+    animation: mainFadeIn 0.4s ease both;
+}
+
+@keyframes mainFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .profile-container {
-    flex: 1;
-    min-width: clamp(120px, 15vw, 260px);
-    border: 2px solid rgb(235, 235, 235);
+    flex: 0 0 clamp(180px, 20vw, 300px);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(8px, 2%, 24px);
-    padding: clamp(12px, 4%, 32px);
-    box-sizing: border-box;
+    gap: clamp(10px, 2vw, 22px);
+    padding: clamp(16px, 4%, 32px) clamp(10px, 2%, 20px);
+    position: sticky;
+    top: clamp(6px, 0.6vw, 14px);
+    height: fit-content;
+    max-height: calc(100vh - clamp(12px, 1.2vw, 28px));
+    overflow-y: auto;
 }
 
 .profile-container img {
-    width: clamp(56px, 40%, 120px);
-    aspect-ratio: 1 / 1;
-    height: auto;
+    width: clamp(52px, 45%, 100px);
+    aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
+    border: 1px solid var(--border-hover);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+    transition: box-shadow var(--t-slow);
+}
+
+.profile-container img:hover {
+    box-shadow: 0 0 0 6px var(--accent-dim);
+}
+
+.profile-container > span {
+    font-family: var(--font-display);
+    font-size: clamp(0.85rem, 1vw + 0.2rem, 1.1rem);
+    font-weight: 300;
+    color: var(--text-soft);
+    text-align: center;
+    letter-spacing: 0.02em;
 }
 
 .options {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: clamp(6px, 1vw, 14px);
+    align-items: stretch;
+    gap: 6px;
     width: 100%;
+}
+
+.options > span {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
 }
 
 .options button {
     width: 100%;
-    font-size: clamp(0.75rem, 1vw + 0.4rem, 1rem);
-    padding: clamp(4px, 0.5vw, 10px) clamp(8px, 1vw, 16px);
+    text-align: left;
+    padding: 0.55rem 0.9rem;
+    font-size: clamp(0.65rem, 0.7vw + 0.3rem, 0.78rem);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    border-radius: var(--radius-xs);
+    position: relative;
 }
 
-span {
-    text-align: center;
+.options button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+    transform: scaleY(0);
+    transition: transform var(--t-normal);
+}
+
+.options button:hover::before {
+    transform: scaleY(1);
 }
 
 .data-container {
-    flex: 3;
+    flex: 1;
     min-width: 0;
-    border: 2px solid rgb(235, 235, 235);
-    padding: clamp(8px, 1.5%, 24px);
-    box-sizing: border-box;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: clamp(16px, 3%, 36px);
     overflow-y: auto;
-    font-size: clamp(0.8rem, 1vw + 0.3rem, 1rem);
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: clamp(0.8rem, 0.8vw + 0.3rem, 0.95rem);
 }
 
 #logout-btn {
     position: absolute;
-    top: clamp(4px, 0.5%, 12px);
-    right: clamp(4px, 0.5%, 12px);
-    font-size: clamp(0.75rem, 0.8vw + 0.4rem, 1rem);
-    padding: clamp(4px, 0.4vw, 8px) clamp(8px, 0.8vw, 14px);
+    top: clamp(12px, 1.2vw, 20px);
+    right: clamp(12px, 1.2vw, 20px);
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--error);
+    border-color: rgba(224, 92, 92, 0.35);
+    background: rgba(224, 92, 92, 0.05);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 10;
+    transition:
+        background var(--t-normal),
+        border-color var(--t-normal),
+        box-shadow var(--t-normal),
+        transform var(--t-fast);
+}
+
+#logout-btn:hover {
+    color: var(--error);
+    border-color: var(--error);
+    background: rgba(224, 92, 92, 0.14);
+    box-shadow: 0 0 16px rgba(224, 92, 92, 0.2);
+    transform: scale(1.08);
+}
+
+#logout-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .main-container {
+        flex-direction: column;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .profile-container {
+        flex: none;
+        width: 100%;
+        position: static;
+        max-height: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .profile-container img {
+        width: 52px;
+    }
+
+    .options {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .options button {
+        width: auto;
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .options > span {
+        width: 100%;
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    #logout-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .data-container {
+        min-height: 60vh;
+    }
 }
