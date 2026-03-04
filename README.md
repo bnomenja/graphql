@@ -1,4 +1,4 @@
-# GraphQL Profile
+# GraphQL
 
 A single-page application that displays a personalized school profile by querying the Zone01 GraphQL API. Built with vanilla JavaScript, CSS custom properties, and SVG for data visualization.
 
@@ -100,5 +100,5 @@ The app is hosted on: _[https://bnomenja.github.io/graphql/]_
 
 ## Author
 
-BEMAMORY Nomenjanahary Luciano Loic (**bnomenja**)  
+BEMAMORY Nomenjanahary Luciano Loic (**bnomenja**) — [Zone01 Oujda](https://learn.zone01oujda.ma)  
 GitHub: [github.com/bnomenja](https://github.com/bnomenja)
