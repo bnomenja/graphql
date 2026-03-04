@@ -88,7 +88,7 @@ Query types used:
 
 ## Hosting
 
-The app is hosted on: _[URL]_
+The app is hosted on: _[https://bnomenja.github.io/graphql/]_
 
 ## Tech
 
