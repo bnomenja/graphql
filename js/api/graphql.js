@@ -10,7 +10,6 @@ export const gql = async (query) => {
     })
 
     const res = await resp.json()
-
     if (res.errors) throw new Error(res.errors[0].message)
 
     return res.data

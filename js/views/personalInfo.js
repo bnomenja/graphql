@@ -7,11 +7,9 @@ const QUERY = `{
         login
         campus
         auditRatio
-        events(limit: 1) {
-            cohorts {
-                labelName
-            }
-        }
+    labels(where: {labelName: {_ilike: "c%"}}) {
+      labelName
+  }
     }
     level: transaction(
         where: { type: { _eq: "level" } }
@@ -36,7 +34,8 @@ const QUERY = `{
 
 const formatUser = (data) => {
     const u     = data.user[0]
-    const promo = u.events[0].cohorts[0].labelName.split("_")
+    const promo = u.labels[0].labelName.split("_")
+
 
     return {
         nickname:  u.login,

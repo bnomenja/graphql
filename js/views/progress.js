@@ -15,11 +15,9 @@ const QUERY = `{
         createdAt
     }
     user {
-        events(limit: 1) {
-            cohorts {
-                labelName
-            }
-        }
+        labels(where: {labelName: {_ilike: "c%"}}) {
+      labelName
+      }
     }
 }`
 
@@ -133,7 +131,8 @@ export const showProgress = async () => {
     try {
         showLoading()
         const data      = await gql(QUERY)
-        const cohort    = data.user[0].events[0].cohorts[0].labelName.split("_")
+        console.log(data)
+        const cohort    = data.user[0].labels[0].labelName.split("_")
         const startTime = new Date(`${cohort[1]}${cohort[2]}${cohort[3]}`).getTime()
         const series    = formatData(data.transaction, startTime)
 
